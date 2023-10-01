@@ -5,6 +5,12 @@ import Image1 from '../images/home_grid_1.jpg';
 import Image2 from '../images/home_grid_2.jpg';
 import Image3 from '../images/home_grid_3.jpg';
 import Image4 from '../images/home_grid_4.jpg';
+import Image5 from '../images/home_grid_5.jpg';
+import Image6 from '../images/home_grid_6.jpg';
+import Image7 from '../images/home_grid_7.jpg';
+import Image8 from '../images/home_grid_8.jpg';
+import Banner from '../images/banner_image.jpg';
+
 const HomePage = ()=> {
   return (
     <div className='bg-amazonclone-background'>
@@ -31,6 +37,33 @@ const HomePage = ()=> {
                   img={Image4}
                   link={"Browse Kindle Unlimited"}
                   />
+                  <HomePageCard
+                  title={"Shop Pet Supplies"}
+                  img={Image5}
+                  link={"See more"}
+                  />
+                  <HomePageCard
+                   title={"Spring Sale"}
+                   img={Image6}
+                   link={"See the deals"}
+                 />
+                 <HomePageCard
+                  title={"Echo Buds"}
+                  img={Image7}
+                  link={"See more"}
+                />
+                <HomePageCard
+                  title={"Echo Buds"}
+                  img={Image8}
+                  link={"Learn more"}
+                />
+              <div className="m-3">
+               <img
+                className="xl:hidden"
+                src={Banner}
+                alt="Banner 2"
+                />
+                </div>
               </div>
         </div>
     </div>
