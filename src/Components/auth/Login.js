@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import amazompng from '../../images/amazon.png'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {GithubAuthProvider, signInWithEmailAndPassword, signInWithPopup} from 'firebase/auth';
 import { auth } from '../../firebase/config';
 import Swal from 'sweetalert2';
@@ -105,8 +105,13 @@ const Login = () => {
             <button onClick={()=> signInWithGithub()} className='flex items-center justify-evenly bg-gray-300 text-gray-500 mt-5 p-3 rounded-full'>
                 <TfiGithub  /> Login With Github 
             </button>
+            <span className='flex items-center justify-center mt-5'>
+              <Link to={"/Register"}>Register</Link>
+              /
+              <Link to={"/RestPassword"}>Rest Password</Link>
+            </span>
         </div>
       </>
      )
 }
-export default Login
+export default Login;
