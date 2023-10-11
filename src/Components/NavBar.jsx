@@ -6,12 +6,13 @@ import { auth } from "../firebase/config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from "../redux/slice/authSlice";
-
+import { BsChevronDown } from "react-icons/bs";
 
 
 const Navbar = () => {
     const [displayName, setDisplayName] = useState("");
     const [photoURL, setPhotoURL] = useState("");
+    const [isMenu, setIsMenu] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -41,10 +42,24 @@ const Navbar = () => {
            }
         })
     }, [dispatch, displayName, photoURL])
-   //  const user = auth.currentUser;
-   //  const photoURL = user.photoURL;
-   
-
+  
+    const isLoggedIn = () => {
+         if(displayName) {
+            return(
+              <>
+                <button onClick={() => !isMenu ? setIsMenu(true) : setIsMenu(false)} className="flex items-center gap-2 hover:underline cursor-pointer text-orange-400">
+                     <div>Hi , {displayName}</div>
+                     <BsChevronDown size={15}/>
+                </button>
+              </>
+            )
+         }
+         return (
+            <Link to="/login" className="flex items-center gap-2 hover:underline cursor-pointer">
+                <div>Login</div>
+            </Link>
+        )
+    }
 
     const logoutUser = () => {
        signOut(auth)
@@ -59,6 +74,7 @@ const Navbar = () => {
               position:'top',
            })
            navigate("/");
+           setIsMenu(false);
        })
        .catch((error) => {
           Swal.fire({
@@ -95,12 +111,25 @@ const Navbar = () => {
              </div>
              {/* {Right} */}
              <div className="flex item-center m-4">
-                  <img src={photoURL} className="w-[50px] h-[50px] rounded-full mt-[-10px] " alt="" />
                  <div className="mt-[-10px] pl-4">  
-                     <Link to={"/login"} className="text-orange-400">{!displayName ? 'LoggedIn' : `Hi ${displayName}` }</Link>
-                     <button onClick={logoutUser} className="ml-5">
-                          {displayName ? 'LogOut' : '' }
-                     </button>
+                       {isLoggedIn()}
+                        <div id="AuthDropDown"  className={`absolute bg-white w-[200px] text-[#333333] z-40 top-[20px] right-5 mt-5 border shadow-lg ${
+                         isMenu ? "visible" : "hidden"
+                          }`}>
+                           <div className="flex justify-start gap-1 p-3">
+                             <img src={photoURL} className="w-[80px] h-[80px] rounded-full mt-[-10px] " alt="" />
+                             <div className="font-bold text-[20px] ml-4">{displayName}</div>
+                           </div>
+                           <div className="border-b" />
+                           <ul className="bg-white">
+                              <li className="text-[11px] py-2 px-4 w-full hover:underline text-blue-500 hover:text-blue-600 cursor-pointer">
+                                 <Link to={"/orders"}>My Orders</Link>
+                              </li>
+                              <li onClick={logoutUser} className="text-[11px] py-2 px-4 w-full hover:underline text-blue-500 hover:text-blue-600 cursor-pointer">
+                                 Sign Out
+                              </li>
+                           </ul>
+                        </div>
                      <div className="text-sm xl:text-base font-bold">
                         Accounts & Lists
                      </div>
@@ -111,3 +140,7 @@ const Navbar = () => {
     )
 }
 export default Navbar;
+
+{/* <button onClick={logoutUser} className="ml-5">
+                          {displayName ? 'LogOut' : '' }
+                     </button> */}
