@@ -141,6 +141,3 @@ const Navbar = () => {
 }
 export default Navbar;
 
-{/* <button onClick={logoutUser} className="ml-5">
-                          {displayName ? 'LogOut' : '' }
-                     </button> */}
