@@ -7,7 +7,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from "../redux/slice/authSlice";
 import { BsChevronDown } from "react-icons/bs";
-
+import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
     const [displayName, setDisplayName] = useState("");
@@ -122,18 +122,29 @@ const Navbar = () => {
                            </div>
                            <div className="border-b" />
                            <ul className="bg-white">
-                              <li className="text-[11px] py-2 px-4 w-full hover:underline text-blue-500 hover:text-blue-600 cursor-pointer">
+                              <li className="text-[11px] py-2 px-4 w-full hover:underline text-gray-500 hover:text-orange-500 cursor-pointer">
                                  <Link to={"/orders"}>My Orders</Link>
                               </li>
-                              <li onClick={logoutUser} className="text-[11px] py-2 px-4 w-full hover:underline text-blue-500 hover:text-blue-600 cursor-pointer">
+                              <li onClick={logoutUser} className="text-[11px] py-2 px-4 w-full hover:underline text-gray-500 hover:text-orange-500 cursor-pointer">
                                  Sign Out
                               </li>
                            </ul>
                         </div>
-                     <div className="text-sm xl:text-base font-bold">
-                        Accounts & Lists
+                         <div className="text-sm xl:text-base font-bold">
+                            Accounts & Lists
+                          </div>
+                        </div>
+                  <Link to={"/cart"}>
+                     <div className="flex pr-3 pl-3">
+                       <ShoppingCartIcon className="h-[48px] mt-[-10px]"/>   
+                         <div className="relative">
+                            <div className="absolute right-[9px] font-bold mt-[-18px] mr-[-8px] text-xl text-orange-400">
+                               0
+                            </div>
+                         </div>
+                         <div className="mt-[-9px] ml-[4px] text-xs xl:text-sm font-bold">shopping<span className="flex font-bold text-lg">-Basket</span></div>
                      </div>
-                 </div>
+                   </Link>
              </div>
           </div>
         </header>
