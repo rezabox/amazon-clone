@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from "../redux/slice/authSlice";
 import { BsChevronDown } from "react-icons/bs";
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
+import { AdminOnlyLink } from "./adminOnlyRoute/AdminOnlyRoute";
 
 const Navbar = () => {
     const [displayName, setDisplayName] = useState("");
@@ -125,6 +126,11 @@ const Navbar = () => {
                               <li className="text-[11px] py-2 px-4 w-full hover:underline text-gray-500 hover:text-orange-500 cursor-pointer">
                                  <Link to={"/orders"}>My Orders</Link>
                               </li>
+                             <AdminOnlyLink>
+                               <li className="text-[11px] py-2 px-4 w-full hover:underline text-gray-500 hover:text-orange-500 cursor-pointer">
+                                 <Link to={"/adminPanel"}>Admin Panel</Link>
+                               </li>
+                              </AdminOnlyLink>
                               <li onClick={logoutUser} className="text-[11px] py-2 px-4 w-full hover:underline text-gray-500 hover:text-orange-500 cursor-pointer">
                                  Sign Out
                               </li>

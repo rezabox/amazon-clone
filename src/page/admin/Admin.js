@@ -1,6 +1,13 @@
+import NavbarUser from "../../Components/admin/navbar/NavbarUser";
+
+
 const Admin = () => {
-     return(
-        <h1>reza</h1>
-     )
+  return(
+      <>
+      <NavbarUser/>
+         
+        
+       </>
+    )
 } 
 export default Admin;

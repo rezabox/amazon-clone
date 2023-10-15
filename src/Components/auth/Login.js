@@ -105,10 +105,8 @@ const Login = () => {
             <button onClick={()=> signInWithGithub()} className='flex items-center justify-evenly bg-gray-300 text-gray-500 mt-5 p-3 rounded-full'>
                 <TfiGithub  /> Login With Github 
             </button>
-            <span className='flex items-center justify-center mt-5'>
-              <Link to={"/Register"}>Register</Link>
-              /
-              <Link to={"/RestPassword"}>Rest Password</Link>
+            <span className='flex items-center justify-center mt-5 '>
+              <Link to={"/Register"} className='bg-gray-300 p-2 text-gray-500 rounded-full'>Register another account</Link>
             </span>
         </div>
       </>
