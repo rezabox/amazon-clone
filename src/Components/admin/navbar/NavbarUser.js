@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectUserImage, selectUserName } from "../../../redux/slice/authSlice";
+import { Link } from "react-router-dom";
 
 
 const NavbarUser = () => {
@@ -11,6 +12,22 @@ const NavbarUser = () => {
               <img src={userImage} className="w-[20%] rounded-full" alt="" />  
               <h1 className="font-bold">{userName}</h1>
            </div>
+           <nav className="h-[83vh]">
+              <ul className="space-y-5 p-5">
+                  <li>
+                     <Link to={'/adminPanel/Home'} className="focus:text-white">Home</Link>
+                  </li>
+                  <li>
+                     <Link to={'/adminPanel/all-product'} className="focus:text-white">All Products</Link>
+                  </li>
+                  <li>
+                      <Link to={'/adminPanel/all-product/ADD'} className="focus:text-white">Add Product</Link>
+                  </li>
+                  <li>
+                       <Link to={'/adminPanel/orders'} className="focus:text-white">Orders</Link>
+                  </li>
+              </ul>
+           </nav>
       </div> 
    );
 };
