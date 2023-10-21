@@ -46,30 +46,15 @@ const Login = () => {
      };
      const provider = new GithubAuthProvider();
      const signInWithGithub = ()=> {
-        signInWithPopup(auth, provider)
-        .then((result)=> {
-          Swal.fire({
-            title:"Login Successful...",
-            icon: "success",
-            showConfirmButton: false,
-            timerProgressBar: true,
-            timer:3000,
-            toast:true,
-            position:'top',
-            })  
-            redirectUser();
-        })
-        .catch((error) => {
-          Swal.fire({
-            title:"Problem in it",
-            icon: "warning",
-            showConfirmButton: false,
-            timerProgressBar: true,
-            timer:3000,
-            toast:true,
-            position:'top',
-            })  
-        })
+      signInWithPopup(auth, provider)
+      .then((result) => {
+        // const user = result.user;
+        console.log("Login Successfully");
+        redirectUser();
+      })
+      .catch((error) => {
+        console.log('error');
+      });
      }
 
      return(
@@ -102,7 +87,7 @@ const Login = () => {
                 Login 
              </button>
             </form>
-            <button onClick={()=> signInWithGithub()} className='flex items-center justify-evenly bg-gray-300 text-gray-500 mt-5 p-3 rounded-full'>
+            <button onClick={signInWithGithub} className='flex items-center justify-evenly bg-gray-300 text-gray-500 mt-5 p-3 rounded-full'>
                 <TfiGithub  /> Login With Github 
             </button>
             <span className='flex items-center justify-center mt-5 '>
