@@ -118,7 +118,7 @@ const Navbar = () => {
                          isMenu ? "visible" : "hidden"
                           }`}>
                            <div className="flex justify-start gap-1 p-3">
-                             <img src={photoURL} className="w-[80px] h-[80px] rounded-full mt-[-10px] " alt="" />
+                             {/* <img src={photoURL} className="w-[80px] h-[80px] rounded-full mt-[-10px] " alt="" /> */}
                              <div className="font-bold text-[20px] ml-4">{displayName}</div>
                            </div>
                            <div className="border-b" />
