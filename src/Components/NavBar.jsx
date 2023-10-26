@@ -26,7 +26,7 @@ const Navbar = () => {
                   setDisplayName(uName);
               } else {
                  setDisplayName(user.displayName);
-                 setPhotoURL(user.photoURL)
+                 setPhotoURL(user.photoURL);
               }
               dispatch(
                 SET_ACTIVE_USER({
@@ -118,8 +118,8 @@ const Navbar = () => {
                          isMenu ? "visible" : "hidden"
                           }`}>
                            <div className="flex justify-start gap-1 p-3">
-                             {/* <img src={photoURL} className="w-[80px] h-[80px] rounded-full mt-[-10px] " alt="" /> */}
-                             <div className="font-bold text-[20px] ml-4">{displayName}</div>
+                             <img src={photoURL} className="w-[80px] h-[80px] rounded-full mt-[-10px] " alt="" />
+                             <div className="font-bold text-[20px]  ml-4">{displayName}</div>
                            </div>
                            <div className="border-b" />
                            <ul className="bg-white">
@@ -128,7 +128,7 @@ const Navbar = () => {
                               </li>
                              <AdminOnlyLink>
                                <li className="text-[11px] py-2 px-4 w-full hover:underline text-gray-500 hover:text-orange-500 cursor-pointer">
-                                 <Link to={"/adminPanel"}>Admin Panel</Link>
+                                 <Link to={"/admin"}>Admin Panel</Link>
                                </li>
                               </AdminOnlyLink>
                               <li onClick={logoutUser} className="text-[11px] py-2 px-4 w-full hover:underline text-gray-500 hover:text-orange-500 cursor-pointer">
@@ -157,4 +157,3 @@ const Navbar = () => {
     )
 }
 export default Navbar;
-
