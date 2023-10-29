@@ -1,5 +1,46 @@
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import React, { useState } from 'react';
+import { db, storage } from '../../../firebase/config';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Timestamp, addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
+
+
+
+const categories = [
+    {id:1 , name: 'a'},
+    {id:2 , name: 'b'},
+    {id:3 , name: 'c'},
+    {id:4 , name: 'd'},
+];
+const initialState = {
+   name: "",
+   imageURL1: "",
+   imageURL2: "",
+   imageURL3: "",
+   price: 0,
+   category: "",
+   brand: "",
+   desc: "",
+};
 const AddProduct = () => {
-  return (
+  const [product, setProduct] = useState({
+    ...initialState,
+  });
+  const navigate = useNavigate();
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setProduct({...product, [name]: value});
+  };
+  const handleImageChange = (e)=>{
+     const file = e.target.files[0];
+     const storageRef = ref(storage, `eshop/${Date.now()}${file.name}`);
+     const uploadTest = uploadBytesResumable(storageRef, file);
+  } 
+
+  return(
     <>
       <div className="product w-[100%] md:max-w-[1000px] max-w-[500px]">
         <h2>Add New Product / Edit Product</h2>
