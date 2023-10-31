@@ -113,8 +113,23 @@ const AddProduct = () => {
             />
             </div>
             <div className="styleLabel">
-            <label className="adminLable">Product image</label>
-            <input type="file" accept="image/*" />
+            <label className="adminLable">Product image:</label>
+            <card className='max-w-[500px] p-4 '>
+              {uploadProgress === 0 ? null : (
+                   <div className='bg-white border border-slate-500 rounded-md'>
+                       <div className="bg-orange-400 border border-slate-500 rounded-md
+                          text-xl font-medium"
+                       style={{ width: `${uploadProgress}%` }}
+                       >
+                           {uploadProgress < 100 
+                              ? `Uploading ${uploadProgress}`
+                              :  `Uploading Complete ${uploadProgress}%`}               
+                       </div>
+                   </div>
+              )}
+               <input type="file" accept="image/*" placeholder='product image' name='image' onChange={(e) => handleImageChange(e)} />
+               
+            </card>         
             </div>
             <div className="styleLabel">
             <label className="adminLable">Product price:</label>
