@@ -37,9 +37,37 @@ const AddProduct = () => {
   const handleImageChange = (e)=>{
      const file = e.target.files[0];
      const storageRef = ref(storage, `eshop/${Date.now()}${file.name}`);
-     const uploadTest = uploadBytesResumable(storageRef, file);
+     const uploadTask = uploadBytesResumable(storageRef, file);
+     
+     uploadTask.on(
+       "state_changed",
+        (snapshot) =>{
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setUploadProgress(progress);   
+        },   
+        (error) => {
+            Swal.fire({
+                 title: 'Upload is problem',
+                 color: 'warning',
+                 timer:3000,
+                 position: 'top'
+            })
+        },
+        () =>{
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              setProduct({...product, imageURL: downloadURL});
+              Swal.fire({
+                title: 'Upload is successful',
+                color: 'success',
+                timer:3000,
+                position: 'top'
+              })
+           })
+        } 
+     )
   } 
-
+  
+  
   return(
     <>
       <div className="product w-[100%] md:max-w-[1000px] max-w-[500px]">
