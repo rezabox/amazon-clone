@@ -38,7 +38,6 @@ const AddProduct = () => {
      const file = e.target.files[0];
      const storageRef = ref(storage, `eshop/${Date.now()}${file.name}`);
      const uploadTask = uploadBytesResumable(storageRef, file);
-     
      uploadTask.on(
        "state_changed",
         (snapshot) =>{
@@ -66,8 +65,37 @@ const AddProduct = () => {
         } 
      )
   } 
-  
-  
+  const addProduct = (e) => {
+       e.preventDefault();
+       try{
+          const docRef = addDoc(collection(db, "products"), {
+               name:product.name,
+               imageURL1:product.imageURL1,
+               imageURL2:product.imageURL2,
+               imageURL3:product.imageURL3,
+               price: Number(product.price),
+               category: product.category,
+               brand: product.desc,
+               createdAt: Timestamp.now().toDate(),
+          });
+          setUploadProgress(0);
+          setProduct({ ...initialState });
+          Swal.fire({
+              title:'Product uploaded succesfully',
+              color:'success',
+              timer:3000,
+              position: 'top'
+          })
+       }catch(e){
+              Swal.fire({
+                  title:'Product is problem to upload',
+                  color: 'warning',
+                  timer: 3000,
+                  position: 'top',
+              })
+       }
+  }
+
   return(
     <>
       <div className="product w-[100%] md:max-w-[1000px] max-w-[500px]">
