@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { auth } from "../firebase/config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from "../redux/slice/authSlice";
 import { BsChevronDown } from "react-icons/bs";
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
@@ -25,6 +25,7 @@ const Navbar = () => {
                   const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
                   setDisplayName(uName);
               } else {
+                 console.log(user.photoURL);
                  setDisplayName(user.displayName);
                  setPhotoURL(user.photoURL);
               }
