@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Timestamp, addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import { selectProduct } from '../../../redux/slice/productSlice';
 
 
 
@@ -15,17 +16,19 @@ const categories = [
     {id:4 , name: 'd'},
 ];
 const initialState = {
-   name: "",
-   imageURL1: "",
-   imageURL2: "",
-   imageURL3: "",
-   price: 0,
-   category: "",
-   brand: "",
-   desc: "",
+  name: "",
+  imageURL1: "",
+  price: 0,
+  category: "",
+  brand: "",
+  desc: "",
 };
+
 const AddProduct = () => {
   const { id } = useParams();
+  const products = useSelector(selectProduct);
+  const productEdit = products.find((item) => item.id === id);
+  console.log(productEdit);
   const [product, setProduct] = useState({
     ...initialState,
   });
@@ -62,7 +65,7 @@ const AddProduct = () => {
         },
         () =>{
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              setProduct({...product, imageURL: downloadURL});
+              setProduct({ ...product, imageURL1: downloadURL,});
               Swal.fire({
                 title: 'Upload is successful',
                 color: 'success',
@@ -70,21 +73,21 @@ const AddProduct = () => {
                 position: 'top'
               })
            })
-        } 
+        },
      )
   } 
+
   const addProduct = (e) => {
        e.preventDefault();
        try{
           const docRef = addDoc(collection(db, "products"), {
-               name:product.name,
-               imageURL1:product.imageURL1,
-               imageURL2:product.imageURL2,
-               imageURL3:product.imageURL3,
-               price: Number(product.price),
-               category: product.category,
-               brand: product.desc,
-               createdAt: Timestamp.now().toDate(),
+            name: product.name,
+            imageURL1: product.imageURL1,
+            price: Number(product.price),
+            category: product.category,
+            brand: product.brand,
+            desc: product.desc,
+            createdAt: Timestamp.now().toDate(),
           });
           setUploadProgress(0);
           setProduct({ ...initialState });
@@ -104,10 +107,40 @@ const AddProduct = () => {
        }
   }
 
+  const editProduct = (e) => {
+       e.preventDefault();
+
+       if(product.imageURL1 !== productEdit.imageURL1){
+          const storageRef = ref(storage, productEdit.imageURL1);
+          deleteObject(storageRef)
+       }
+       try {
+        setDoc(doc(db, "products", id), {
+          name: product.name,
+          imageURL1: product.imageURL1,
+          price: Number(product.price),
+          category: product.category,
+          brand: product.brand,
+          desc: product.desc,
+          createdAt: productEdit.createdAt,
+          editedAt: Timestamp.now().toDate(),
+        });
+         Swal.fire({
+             title: "Product Edited Successfully",
+             position: 'top',
+         })
+      } catch (e){
+        Swal.fire({
+          title: "Product Edited Problem",
+          position: 'top',
+      })
+      }
+  };
+
   return(
     <>
       <div className="product w-[100%] md:max-w-[1000px] max-w-[500px]">
-        <h2>{detectForm(id, "Add New Product", "Edit Product")}</h2>
+        <h2 className='font-bold p-1'>Add New Product</h2>
         <card className="cardNav">
           <form onSubmit={addProduct} className='p-4'>
             <div className="styleLabel">
@@ -118,6 +151,7 @@ const AddProduct = () => {
               required
               name="name"
               value={product.name}
+              className='Lableinput'
               onChange={(e) => handleInputChange(e)}
              />
              </div>
@@ -136,12 +170,12 @@ const AddProduct = () => {
                        </div>
                    </div>
               )}
-               <input type="file" accept="image/*" placeholder='product image' name='image' onChange={(e) => handleImageChange(e)} />
+               <input type="file" accept="imageURL1/*" placeholder='product image' name='imageURL1' onChange={(e) => handleImageChange(e)} />
                {product.imageURL1 === "" ? null : (
                   <input
-                     type="file"
-                     placeholder='Image URL1'
-                     name="imageURL"
+                     type="text"
+                     placeholder='Image URL'
+                     name="imageURL1"
                      value={product.imageURL1}
                      disabled
                   />
@@ -155,13 +189,14 @@ const AddProduct = () => {
               placeholder="Product price"
               required
               name="price"
+              className='Lableinput'
               value={product.price}
               onChange={(e) => handleInputChange(e)}
             />
             </div>
             <div className="styleLabel">
              <label className="adminLable">Product Category:</label>
-             <select name="category" required value={product.category} onChange={(e) => handleInputChange(e)}>
+             <select name="category" required value={product.category} className='Lableinput' onChange={(e) => handleInputChange(e)}>
                  <option value="" disabled>
                    -- choose product category --
                  </option>
@@ -180,10 +215,10 @@ const AddProduct = () => {
           </div>
           <div className='flex flex-col p-5'>
           <label className='text-xl '>Product Description</label>
-          <textarea name="desc" required className='mt-5 border-2 border-slate-500 rounded-md outline-none p-2'  cols="30" rows="10"></textarea>
+          <textarea name="desc" required className='mt-5 border-2 border-slate-500 rounded-md outline-none p-2'  cols="30" rows="10" value={product.desc} onChange={(e) => handleInputChange(e)} ></textarea>
           </div>
-          <button className="btn p-5 text-md bg-orange-400 rounded-full">
-              Save Product / Edit Product
+          <button className="btn p-5 text-md font-bold ml-[15px] bg-orange-400 rounded-full">
+              Save Product
           </button>
           </form>
         </card>
