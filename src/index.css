@@ -41,3 +41,20 @@ html{
      border-radius: 12px;
      outline: none;
 }
+.container{
+  width: 100%;
+}
+.table{
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 1300px;
+  font-size: 1rem;
+}
+thead {
+  border-top: 2px solid orange;
+  border-bottom: 2px solid orange;
+}
+td{
+  vertical-align: top;
+  text-align: center;
+}
