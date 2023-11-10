@@ -65,12 +65,12 @@ const ViewProducts = () => {
   return (
     <>
      {isLoading && <Loader />}
-      <div className="table">
+      <div className="container p-5">
         <h2>All Products</h2>
         {products.length === 0 ? (
           <p>No product found.</p>
         ) : (
-          <table>
+          <table className="table">
             <thead>
               <tr>
                 <th>s/n</th>
@@ -84,23 +84,23 @@ const ViewProducts = () => {
             {products.map((product, index) => {
               const { id, name, price, imageURL1, category } = product;
               return (
-                <tbody key={product.id}>
+                <tbody key={id}>
                   <tr>
                     <td>{index + 1}</td>
-                    <td>
+                    <td className="flex item-center justify-center">
                       <img
                         src={imageURL1}
                         alt={name}
-                        style={{ width:100 }}
+                        style={{ width:50 }}
                       />
                     </td>
                     <td>{name}</td>
                     <td>{category}</td>
                     <td>{`$${price}`}</td>
-                    <td className="icon">
-                    
+                    <td className="flex items-center justify-center">
                       <FaTrashAlt
-                         size={18}
+                         size={20}
+                         className="cursor-pointer"
                          color="red"
                          onClick={() => confirmDelete(id, imageURL1)}
                       />
