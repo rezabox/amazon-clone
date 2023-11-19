@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import ImageAmazon from '../images/amazon.png';  
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { auth } from "../firebase/config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
