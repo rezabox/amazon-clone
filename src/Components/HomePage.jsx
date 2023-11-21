@@ -7,10 +7,12 @@ const HomePage = ()=> {
   
   return (
     <> 
-    <div className='bg-amazonclone-background'>
+    <div className='bg-amazonclone-background h-[100vh]'>
         <div className='sm:min-w-[1000px] sm:max-w-[1500px] m-auto'>
               <Carousel/>
+              <div className='mt-[-150px]'>
               <Product/>
+              </div>
           </div>
     </div>
     </>
