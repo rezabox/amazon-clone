@@ -1,0 +1,85 @@
+.grid {
+  position: relative;
+}
+.grid .img {
+  width: 80%;
+  overflow: hidden;
+  border-bottom: 3px solid #eee;
+}
+.section{
+  display: flex;
+}
+.list{
+  width: 400px;
+}
+list{
+  /* background-color: aqua; */
+}
+.img{
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: rgba(255, 166, 0, 0.546);
+  border-radius: 12px;
+}
+/* 
+ 
+
+.section{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  
+}
+.grid .img img {
+  padding: 20px;
+  width: 100%;
+  cursor: pointer;
+}
+.content{
+   width: 70%;
+   background-color: aqua;
+}
+.details{
+   text-align: center;
+} */
+/*
+
+.grid .details {
+  text-align: center;
+  margin: 5px;
+}
+.grid button {
+  width: 100%;
+  margin-top: 25px;
+}
+.grid p {
+  color: orangered;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.list {
+  width: 100%;
+  height: 20rem;
+  max-height: 32rem;
+  display: flex;
+  background-color: #fff;
+  margin: 2px 0;
+}
+.list img {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+.list .details {
+  margin-top: 30px;
+}
+.list .details p {
+  color: orangered;
+  font-weight: 600;
+}
+.list button {
+  margin-top: 10px;
+} */
+
