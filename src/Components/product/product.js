@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_PRICE_RANGE, STORE_PRODUCTS, selectProduct } from "../../redux/slice/productSlice";
 import useFetchCollection from "../customHooks/useFetchCollection";
+import ProductList from "./productList/ProductList";
 import ProductItem from "./productItem/ProductItem";
+
 
 const Product = () => {
    const { data, isLoading } = useFetchCollection("products");
-   const [showFilter, setShowFilter] = useState(false);
    const products = useSelector(selectProduct);
    const dispatch = useDispatch();
    
@@ -25,7 +26,7 @@ const Product = () => {
   return(
     <>
        <div>
-        
+           <ProductItem />
        </div>
     </>
   )
