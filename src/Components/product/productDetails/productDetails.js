@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import useFetchCollection from "../../customHooks/useFetchCollection";
 import useFetchDocument from "../../customHooks/useFetchDocument";
 import Product from "../product";
+import Loader from "../../loader/Loader";
+
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -40,11 +42,31 @@ const ProductDetails = () => {
                   </div>
                   {product === null ? (
                       <> 
-                        
+                        <Loader/>
                       </>
                   ) : (
-                    <>
-                    </>
+                     <>
+                       <div className="details">
+                         <div className="img">
+                           <img src={product.imageURL1} alt={product.name} />
+                         </div>
+                         <div className="content">
+                             <h3>{product.name}</h3>
+                             <p className="price">{`$${product.price}`}</p>
+                             <p>{product.desc}</p>
+                             <div className="count">
+                                {isCartAdded < 0 ? null : (
+                                    <>
+                                      <button className="decressBtn">
+                                           -
+                                      </button>
+                                      <b>{cart.cartQuantity}</b>
+                                    </>
+                                )}
+                             </div>
+                         </div>
+                       </div>
+                     </>
                   )}
               </div>
         </section>
