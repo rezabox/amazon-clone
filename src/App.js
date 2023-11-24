@@ -7,6 +7,7 @@ import RegisterUser from "./Components/auth/Register";
 import AdminOnlyRoute from "./Components/adminOnlyRoute/AdminOnlyRoute";
 import Orders from "./Components/admin/orders/Orders";
 import Admin from "./page/admin/Admin";
+import ProductDetails from "./Components/product/productDetails/productDetails";
 // import {Admin} from './page'
 // import AddProduct from "./Components/admin/AddProduct/AddProduct";
 
@@ -20,6 +21,7 @@ const App = ()=> {
           <Route path="/login" element={<Login/>}/>
           <Route path="/Register" element={<RegisterUser/>} />
           <Route path="/admin/*" element={<AdminOnlyRoute><Admin/></AdminOnlyRoute>} />
+          <Route path="/product-details/:id" element={<ProductDetails/>}/>
        </Routes>
      </BrowserRouter>
   )
