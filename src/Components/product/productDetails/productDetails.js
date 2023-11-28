@@ -57,13 +57,21 @@ const ProductDetails = () => {
                              <div className="count">
                                 {isCartAdded < 0 ? null : (
                                     <>
-                                      <button className="decressBtn">
-                                           -
+                                      <button 
+                                      className="decressBtn"
+                                      onClick={()=> decreaseCart(product)}>
+                                        -
                                       </button>
                                       <b>{cart.cartQuantity}</b>
+                                      <button 
+                                      className="incressesBtn" 
+                                      onClick={()=> addToCart(product)}>
+                                          +
+                                      </button>
                                     </>
                                 )}
                              </div>
+                             <button className="btn" onClick={()=> addToCart(product)}>ADD TO CART</button>
                          </div>
                        </div>
                      </>
