@@ -54,6 +54,9 @@ const ProductDetails = () => {
                          <div className="content">
                              <h3>{product.name}</h3>
                              <p className="price font-bold text-xl">{`$${product.price}`}</p>
+                             <p>
+                                <b>Brand: {product.brand}</b>
+                             </p>
                              <p>{product.desc}</p>
                              <div className="text-xl font-bold mt-5">
                                 {isCartAdded < 0 ? null : (
