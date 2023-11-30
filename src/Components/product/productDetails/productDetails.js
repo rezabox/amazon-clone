@@ -35,7 +35,7 @@ const ProductDetails = () => {
     };
     return(
         <section>
-              <div className="">
+              <div className="w-[100%] p-10">
                   <h2>Product Details</h2>
                   <div>
                       <Link to="/">&larr; Back To Products</Link>
@@ -46,33 +46,35 @@ const ProductDetails = () => {
                       </>
                   ) : (
                      <>
-                       <div className="details">
-                         <div className="img">
-                           <img src={product.imageURL1} alt={product.name} />
-                         </div>
+                     <div className="flex items-center">
+                      <div className="img">
+                        <img src={product.imageURL1} alt={product.name} />
+                       </div>
+                       <div className="detials">
                          <div className="content">
                              <h3>{product.name}</h3>
-                             <p className="price">{`$${product.price}`}</p>
+                             <p className="price font-bold text-xl">{`$${product.price}`}</p>
                              <p>{product.desc}</p>
-                             <div className="count">
+                             <div className="text-xl font-bold mt-5">
                                 {isCartAdded < 0 ? null : (
                                     <>
                                       <button 
-                                      className="decressBtn"
+                                      className="decressBtn bg-gray-300 pr-3 pl-3 mr-3 rounded-md" 
                                       onClick={()=> decreaseCart(product)}>
                                         -
                                       </button>
                                       <b>{cart.cartQuantity}</b>
                                       <button 
-                                      className="incressesBtn" 
+                                      className="incressesBtn bg-gray-300 pr-3 pl-3 ml-3 rounded-md" 
                                       onClick={()=> addToCart(product)}>
                                           +
                                       </button>
                                     </>
                                 )}
                              </div>
-                             <button className="btn" onClick={()=> addToCart(product)}>ADD TO CART</button>
+                             <button className="bg-orange-400 text-white p-2 rounded-sm mt-5" onClick={()=> addToCart(product)}>ADD TO CART</button>
                          </div>
+                       </div>
                        </div>
                      </>
                   )}
