@@ -8,6 +8,7 @@ import AdminOnlyRoute from "./Components/adminOnlyRoute/AdminOnlyRoute";
 import Orders from "./Components/admin/orders/Orders";
 import Admin from "./page/admin/Admin";
 import ProductDetails from "./Components/product/productDetails/productDetails";
+import Cart from "./page/cart/Cart";
 // import {Admin} from './page'
 // import AddProduct from "./Components/admin/AddProduct/AddProduct";
 
@@ -22,6 +23,7 @@ const App = ()=> {
           <Route path="/Register" element={<RegisterUser/>} />
           <Route path="/admin/*" element={<AdminOnlyRoute><Admin/></AdminOnlyRoute>} />
           <Route path="/product-details/:id" element={<ProductDetails/>}/>
+          <Route path="/cart" element={<Cart/>} />
        </Routes>
      </BrowserRouter>
   )
