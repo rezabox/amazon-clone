@@ -129,6 +129,26 @@ const Cart = () => {
                 );
               })}
             </table>
+            <div className="summary">
+                <button className="bg-orange-400 text-white p-2 rounded-md mt-10" onClick={clearCart}>Clear All Cart</button>
+                <div className="checkout">
+                    <Link to='/'>&larr; Continue shopping</Link>
+                </div>
+                <br />
+                <card className='cardStyle'>
+                  <div className="float-right border-2 border-orange-400 w-[20%] p-5">
+                    <p>
+                      <b>{`Cart Items(s): ${cartTotalQuantity}`}</b>
+                    </p>
+                    <div className="text flex items-center justify-between">
+                         <h4>Subtotal:</h4>
+                         <h3 className="font-bold text-xl">{`$${cartTotalAmount.toFixed(2)}`}</h3>
+                    </div>
+                    <p>Tax an shopping calculate at checkout</p>
+                    <button className="bg-orange-300 p-2 mt-5 w-[100%] text-white text-xl" onClick={checkout}>Checkout</button>
+                  </div>
+                </card>
+            </div>
           </>
         )}
       </div>
