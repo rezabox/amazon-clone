@@ -16,6 +16,7 @@ import {
   selectCartTotalQuantity,
 } from "../../redux/slice/cartSlice";
 
+
 const Cart = () => {
   const cartItems = useSelector(selectCartItems);
   const cartTotalQuantity = useSelector(selectCartTotalQuantity);
@@ -53,8 +54,8 @@ const Cart = () => {
 
   return (
     <section>
-      <div className="container">
-        <h2>Shopping Cart</h2>
+      <div className="container p-10">
+        <h2 className="font-bold">Shopping Cart</h2>
         {cartItems.length === 0 ? (
           <>
             <p>your cart is currently empty.</p>
@@ -65,7 +66,7 @@ const Cart = () => {
           </>
         ) : (
           <>
-            <table>
+            <table className="w-[100%]">
               <thead>
                 <tr>
                   <th>s/n</th>
@@ -80,24 +81,25 @@ const Cart = () => {
                 const { id, name, price, imageURL1, cartQuantity } = cart;
                 return (
                   <>
-                    <tbody key={id}>
-                      <tr>
+                    <tbody key={id} >
+                      <tr className="">
                         <td>{index + 1}</td>
-                        <td>
+                        <td className="">
                           <p>
                             <b>{name}</b>
                           </p>
                           <img
                             src={imageURL1}
+                            className="mt-[-20px]"
                             alt={name}
                             style={{ width: "100px" }}
                           />
                         </td>
                         <td>${price.toFixed(2)}</td>
                         <td>
-                          <div className="count">
+                          <div className="count flex items-center justify-center font-bold text-xl">
                             <button
-                              className="--btn"
+                              className="--btn mr-3"
                               onClick={() => decreaseCart(cart)}
                             >
                               -
@@ -106,7 +108,7 @@ const Cart = () => {
                               <b>{cartQuantity}</b>
                             </p>
                             <button
-                              className="--btn"
+                              className="--btn ml-3"
                               onClick={() => increaseCart(cart)}
                             >
                               +
@@ -114,7 +116,7 @@ const Cart = () => {
                           </div>
                         </td>
                         <td>${(price * cartQuantity).toFixed(2)}</td>
-                        <td className="icon cursor-pointer">
+                        <td className="icon cursor-pointer flex items-center justify-center">
                           <FaTrashAlt
                             size={19}
                             color="red"
