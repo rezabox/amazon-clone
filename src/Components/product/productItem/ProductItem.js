@@ -32,11 +32,11 @@ const ProductItem = ({ product }) => {
             <Loader />
           </>
         ) : (
-          <div className="section">
+          <div className="section space-y-5">
             {products.map((product, index) => {
               const { id, name, price, imageURL1, category } = product;
               return (
-                <list className="list">
+                <div className="list">
                   <div className="img">
                     <Link to={`/product-details/${id}`}>
                       <div className="image_product cursor-pointer">
@@ -56,7 +56,7 @@ const ProductItem = ({ product }) => {
                       </div>
                     </div>
                   </div>
-                </list>
+                </div>
               );
             })}
           </div>
