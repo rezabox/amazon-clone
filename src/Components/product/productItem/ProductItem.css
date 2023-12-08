@@ -1,16 +1,17 @@
 .grid {
-  position: relative;
+  position:relative;  
 }
 .grid .img {
-  width: 70%;
+  width: 75%;
   overflow: hidden;
   border-bottom: 3px solid #eee;
 }
 .section{
   display: flex;
+  flex-wrap: wrap;
 }
 .list{
-  width: 400px;
+  width: 375px;
 }
 
 .img{
