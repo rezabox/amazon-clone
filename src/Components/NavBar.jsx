@@ -4,19 +4,22 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { auth } from "../firebase/config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from "../redux/slice/authSlice";
 import { BsChevronDown } from "react-icons/bs";
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { AdminOnlyLink } from "./adminOnlyRoute/AdminOnlyRoute";
+import { selectCartTotalQuantity } from "../redux/slice/cartSlice";
+import Search from "./Search/Search";
+
 
 const Navbar = () => {
     const [displayName, setDisplayName] = useState("");
     const [photoURL, setPhotoURL] = useState("");
     const [isMenu, setIsMenu] = useState(false);
-
-    const navigate = useNavigate();
+    const cartItem = useSelector(selectCartTotalQuantity);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     useEffect(()=> {
         onAuthStateChanged(auth, (user) => {
            if (user) {
@@ -146,7 +149,7 @@ const Navbar = () => {
                        <ShoppingCartIcon className="h-[48px] mt-[-10px]"/>   
                          <div className="relative">
                             <div className="absolute right-[9px] font-bold mt-[-18px] mr-[-8px] text-xl text-orange-400">
-                               0
+                               {cartItem}
                             </div>
                          </div>
                          <div className="mt-[-9px] ml-[4px] text-xs xl:text-sm font-bold">shopping<span className="flex font-bold text-lg">-Basket</span></div>
