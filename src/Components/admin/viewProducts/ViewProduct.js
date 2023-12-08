@@ -65,7 +65,7 @@ const ViewProducts = () => {
   return (
     <>
      {isLoading && <Loader />}
-      <div className="container p-5">
+      <div className="w-[100%]">
         <h2>All Products</h2>
         {products.length === 0 ? (
           <p>No product found.</p>
@@ -87,20 +87,19 @@ const ViewProducts = () => {
                 <tbody key={id}>
                   <tr>
                     <td>{index + 1}</td>
-                    <td className="flex item-center justify-center">
+                    <td className="w-[100px]">
                       <img
                         src={imageURL1}
                         alt={name}
-                        style={{ width:50 }}
+                        style={{ width: 100 }}
                       />
                     </td>
                     <td>{name}</td>
                     <td>{category}</td>
                     <td>{`$${price}`}</td>
-                    <td className="flex items-center justify-center">
+                    <td className="cursor-pointer  flex items-center justify-center">
                       <FaTrashAlt
-                         size={20}
-                         className="cursor-pointer"
+                         size={19}
                          color="red"
                          onClick={() => confirmDelete(id, imageURL1)}
                       />
