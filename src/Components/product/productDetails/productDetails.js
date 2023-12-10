@@ -1,18 +1,21 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { db } from "../../../firebase/config";
-import { ADD_ITEM_INDEX, CALCULATE_TOTAL_QUANTILY, DECREASE_ITEM, selectCartItems } from "../../../redux/slice/cartSlice";
+import { ADD_ITEM_INDEX, CALCULATE_TOTAL_QUANTILY, DECREASE_ITEM, SAVE_URL, selectCartItems } from "../../../redux/slice/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import useFetchCollection from "../../customHooks/useFetchCollection";
 import useFetchDocument from "../../customHooks/useFetchDocument";
 import Product from "../product";
 import Loader from "../../loader/Loader";
+import { selectIsLoggedIn } from "../../../redux/slice/authSlice";
 
 
 const ProductDetails = () => {
     const { id } = useParams();
     const [product,setProduct] = useState(null);
+    const isLoggIn = useSelector(selectIsLoggedIn);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const cartItems = useSelector(selectCartItems);
     const { document } = useFetchDocument("products", id);
@@ -33,6 +36,15 @@ const ProductDetails = () => {
           dispatch(DECREASE_ITEM(product));
           dispatch(CALCULATE_TOTAL_QUANTILY());
     };
+    const url = window.location.href;
+    const checkLogin = (product) => {
+        if(isLoggIn){
+           addToCart(product)
+        }else{
+            dispatch(SAVE_URL(url))
+            navigate('/login')
+        }
+    } 
     return(
         <section>
               <div className="w-[100%] p-10">
@@ -47,7 +59,7 @@ const ProductDetails = () => {
                   ) : (
                      <>
                      <div className="flex items-center">
-                      <div className="img">
+                      <div className="img w-[500px]">
                         <img src={product.imageURL1} alt={product.name} />
                        </div>
                        <div className="detials">
@@ -75,7 +87,7 @@ const ProductDetails = () => {
                                     </>
                                 )}
                              </div>
-                             <button className="bg-orange-400 text-white p-2 rounded-sm mt-5" onClick={()=> addToCart(product)}>ADD TO CART</button>
+                             <button className="bg-orange-400 text-white p-2 rounded-sm mt-5" onClick={()=> checkLogin(product)}>ADD TO CART</button>
                          </div>
                        </div>
                        </div>
