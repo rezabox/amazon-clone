@@ -1,17 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { createDispatchHook, useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ADD_ITEM_INDEX,
   CALCULATE_TOTAL_QUANTILY,
+  SAVE_URL,
 } from "../../../redux/slice/cartSlice";
 import { selectProduct } from "../../../redux/slice/productSlice";
 import Loader from "../../loader/Loader2";
 import styles from "./ProductItem.css";
+import { selectIsLoggedIn } from "../../../redux/slice/authSlice";
 
 const ProductItem = ({ product }) => {
   const products = useSelector(selectProduct);
+  const isLogIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const url = window.location.href;
+  const checkLogin = (product) => {
+      if(isLogIn){
+        addToCart(product)
+      }else{
+          dispatch(SAVE_URL(url));
+          navigate('/login')          
+      }
+  }
   const shortenText = (text, n) => {
     if (text.length > n) {
       const shortenedText = text.substring(0, n).concat("...");
@@ -34,7 +47,7 @@ const ProductItem = ({ product }) => {
         ) : (
           <div className="section space-y-5">
             {products.map((product, index) => {
-              const { id, name, price, imageURL1, category } = product;
+              const { id, name, price, imageURL1 } = product;
               return (
                 <div className="list">
                   <div className="img">
@@ -49,7 +62,7 @@ const ProductItem = ({ product }) => {
                         <h3>{shortenText(name, 18)}</h3>
                         <button
                           className="btn cursor-pointer"
-                          onClick={() => addToCart(product)}
+                          onClick={() => checkLogin(product)}
                         >
                           Add to Cart
                         </button>
