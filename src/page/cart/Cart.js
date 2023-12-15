@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { selectIsLoggedIn } from "../../redux/slice/authSlice";
 import { FaTrashAlt } from "react-icons/fa";
+import Notiflix from "notiflix";
 import {
   ADD_ITEM_INDEX,
   CALCULATE_SUBTOTAL,
@@ -51,10 +52,31 @@ const Cart = () => {
       navigate("/login");
     }
   };
+  const confirmDelete = (id, imageURL1) => {
+    Notiflix.Confirm.show(
+      "Delete Product!!",
+      "You are about to delete this product",
+      "Delete",
+      "Cancel",
+      function okCd() {
+        removeFromCart(id, imageURL1);
+      },
+      function cancelCd(){
+        console.log('canceled deleted');
+      },
+      {
+        width: "320px",
+        borderRadius: "3px",
+        titleColor: "orangered",
+        okButtonBackground: "orangered",
+        cssAnimationStyle: "zoom",
+      },
+    );
+  };
 
   return (
     <section>
-      <div className="container p-10">
+      <div className="container p-10 h-[80vh]">
         <h2 className="font-bold">Shopping Cart</h2>
         {cartItems.length === 0 ? (
           <>
@@ -120,7 +142,7 @@ const Cart = () => {
                           <FaTrashAlt
                             size={19}
                             color="red"
-                            onClick={() => removeFromCart(cart)}
+                            onClick={() => confirmDelete(cart)}
                           />
                         </td>
                       </tr>
@@ -136,7 +158,7 @@ const Cart = () => {
                 </div>
                 <br />
                 <card className='cardStyle'>
-                  <div className="float-right border-2 border-orange-400 w-[20%] p-5">
+                  <div className="float-right mt-[-8%] border-2 border-orange-400 w-[20%] p-5">
                     <p>
                       <b>{`Cart Items(s): ${cartTotalQuantity}`}</b>
                     </p>
